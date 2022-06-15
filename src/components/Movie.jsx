@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Card, Col, Row } from 'react-bootstrap';
 import ReactStars from 'react-rating-stars-component';
+import {Link} from 'react-router-dom'
 function Movie({search}) {
     const [movies,setMovies] = useState([]);
 
@@ -18,7 +19,7 @@ function Movie({search}) {
             {movies?.filter(el => el.title.toLowerCase().includes(search.toLowerCase()) ).map(el=>  (
               <Col>
                 <Card>
-                  <Card.Img height="450" variant="top" src={el.imgUrl} />
+                  <Link to={`/movie/${el._id}`}><Card.Img height="450" variant="top" src={el.imgUrl} /></Link>
                   <Card.Body>
                     <Card.Title>{el.title}</Card.Title>
                     <Card.Text>
@@ -26,7 +27,7 @@ function Movie({search}) {
                      
                     </Card.Text>
                   </Card.Body>
-                  <Card.Footer>
+                  <Card.Footer className='d-flex justify-content-center'>
                   <ReactStars
                         value={el.rate}
                         size={24}
